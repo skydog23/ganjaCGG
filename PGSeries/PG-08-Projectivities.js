@@ -16,7 +16,6 @@ var {g3,pbut} = Algebra(2,0,1,()=>{
   let ptcoords = (pt)=>[-pt.e02,pt.e01,pt.e12];
   let lncoords = (ln)=>[ln.e1,ln.e2,ln.e0];
 
-  let transpose = (a2d) => a2d[0].map((_, colIndex) => a2d.map(row => row[colIndex]));
 
   let edges4 = ([a,b,c,d]) => [[a,b],[a,c],[a,d],[b,c],[b,d],[c,d]];
   
@@ -123,6 +122,7 @@ var {g3,pbut} = Algebra(2,0,1,()=>{
 //     let P = l^r,
 //       Q = t^b,
 //       M = 
+  let transpose = (a2d) => a2d[0].map((_, colIndex) => a2d.map(row => row[colIndex]));
 
   let matInv = ([[a,b,c],[d,e,f],[g,h,i]])=> [[e*i-f*h,-(d*i-f*g),d*h-e*g], [-(b*i-c*h), a*i-c*g,-(a*h-b*g)], [b*f-c*e, -(a*f-c*d), a*e-b*d]];
 
