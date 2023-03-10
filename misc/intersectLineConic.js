@@ -6,8 +6,8 @@ Algebra(2,0,1,()=>{
   var ptcoords = (pt)=>[-pt.e02,pt.e01,pt.e12];
   var mynorm = (pt) => {pt = pt.Normalized; if (pt.e12 < 0) pt = -pt; return pt;}
   
-  var findRoot = ([a,b,c], [A,B,C])=> {
-      var P0 = (c==0) ? 1e12 : mynorm(point(c*a,c*b, -(a*a+b*b))),
+  var findRoot = ([a,b,c], [A,B,C])=> {  //  intersect line ax+by+c = 0 with Ax^2+By^2+C = 0
+      var P0 = (c===0) ? 1e12 : mynorm(point(c*a,c*b, -(a*a+b*b))),
           V = point(b,-a,0);
       var ptAtTime = (t)=>P0+t*V,
           valueAtPt = ([x,y,z])=>A*x*x+B*y*y+C*z*z;

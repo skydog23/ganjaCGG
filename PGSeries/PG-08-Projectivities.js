@@ -92,21 +92,23 @@ var {g3,pbut} = Algebra(2,0,1,()=>{
       return this.getQuadrant(1-binx[0] + 2*(1-biny[0]));
     }
     getQuadrant( which ) {
+      let val = [];
       switch(which) {
         case 0:
-          return [this.P23, this.P1, this.P03, this.P0231];
+          val = [this.P23, this.P1, this.P03, this.P0231];
           break;
         case 1:
-          return [this.P03, this.P2, this.P01, this.P0231];
+          val = [this.P03, this.P2, this.P01, this.P0231];
           break;
         case 2:
-          return [this.P12, this.P0, this.P23, this.P0231];
+          val =  [this.P12, this.P0, this.P23, this.P0231];
           break;
         case 3:
         default:
-          return [this.P01, this.P3, this.P12, this.P0231];
+          val = [this.P01, this.P3, this.P12, this.P0231];
           break;
       }
+      return val;
     }
   }
    let binbo = (n,a)=>{
