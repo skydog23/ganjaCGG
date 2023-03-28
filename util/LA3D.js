@@ -1,4 +1,4 @@
-let {pow} = Math;
+let {pow, sqrt} = Math;
 
 let transpose = (a2d) => a2d[0].map((_, colIndex) => a2d.map(row => row[colIndex]));
 let coFactor = ([[a,b,c],[d,e,f],[g,h,i]])=> [[e*i-f*h,-(d*i-f*g),d*h-e*g], [-(b*i-c*h), a*i-c*g,-(a*h-b*g)], [b*f-c*e, -(a*f-c*d), a*e-b*d]];
@@ -28,11 +28,10 @@ let matVecMul = (m, v) => {let ret = [0,0,0]; // Array(3).fill(Array(3).fill(0))
 
 let scVecMul = (s, v) => v.map((x) => x * s);
 let scMatMul = (s, m) => m.map((x) => x.map((y) => y * s));
-
 let dotVec = (u, v) => u[0] * v[0] + u[1] * v[1] + u[2] * v[2];
-
-let vecVecAdd = (u, v) => u.map((x, i) => x + v[i]);
-
+let vecVecAdd = (u, v) => u.map((x, i) => x + v[i])
+let cross = (u,v) => [u[1]*v[2] - u[2]*v[1], u[2]*v[0]-u[0]*v[2], u[0]*v[1]-u[1]*v[0]]
+let vecNorm = (v) => {let nn = sqrt(v[0]*v[0]+v[1]*v[1]); return v.map(x=>x/nn)}
 
 let test = ()=> {
 
@@ -49,4 +48,4 @@ console.log(dotVec(u,v));
 let debug = false;
 if (debug) test();
 
-export {matVecMul, det, normMat, coFactor, matInv, matMul, scVecMul, scMatMul, matTr, dotVec, vecVecAdd};
+export {matVecMul, det, normMat, coFactor, matInv, matMul, scVecMul, scMatMul, matTr, dotVec, vecVecAdd, cross, vecNorm};

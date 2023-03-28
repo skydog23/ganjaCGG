@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script SRC="https://unpkg.com/ganja.js"></script>
+    <script SRC="../util/conics.js" ></script>
+    <script SRC="../util/math.js"></script>
+    <svg xmlns="http://www.w3.org/2000/svg"></svg>
+
+    </head>
+<body>
+
+
+<div id="animation" style="position:absolute; top:0; left:0; z-index:-1; width:100%; height:100%; background:#ffffcc">
+</div>
+<script>
+
+/*
+        let xyz2svg = ([x,y,z])=>`${x},${y} `,
+            pts2svg = (pts)=>pts.map(pt=>xyz2svg(pt)).join('');
+        let pts = [[1,0,1],[0,1,1],[-1,0,1],[0,-1,1],[sqrt(2)/2, sqrt(2)/2,1]]
+        let cc = Conic.conicFromFivePoints(pts);
+        let pointsOnConic = cc.getPointsOnConic(10),
+            conicPts = pts2svg(pointsOnConic)
+*/
+
+        let sc = .9
+        let svg=new DOMParser().parseFromString(`<SVG viewBox="-1 -1 2 2" style="width:512px; height:512px; background-color:#eee;">
+           <polygon points="${-sc},${-sc} ${sc},${-sc} ${sc},${sc} ${-sc},${sc}" fill="none" stroke="black" stroke-width=".002"/>
+           <circle cx="0" cy=".2" r=".5" fill="none" stroke="yellow" stroke-width=".004"/>
+           </SVG>`,'text/html').body;
+        // return the inside of the created svg element
+       document.querySelector("#animation").append(svg.removeChild(svg.firstChild));
+    </script>
+
+</body>
+</html>

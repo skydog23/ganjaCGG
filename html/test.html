@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script SRC="https://unpkg.com/ganja.js"></script>
+    <script SRC="../util/conics.js"></script>
+</head>
+<body>
+
+
+<div id="animation" style="position:absolute; top:0; left:0; z-index:-1; width:100%; height:100%; background:#ffffcc">
+</div>
+<script>
+
+    // Class Quad {
+    //     getQuad() {
+    //         return [[1,1,1],[-1,1,1],[-1,-1,1],[1,-1,1]]
+    //     }
+    // }
+    //window.Quad = Quad
+    Algebra(2,0,1, ()=>{
+
+        let point = (x,y,z)=>z*1e12-x*1e02+y*1e01
+        let line = (x,y,z)=>x*1e1+y*1e2+z*1e0
+        var redbluelerp = (t) => (floor(t*255) * 65536 + floor((1-t)*255));
+        let {cos, sin, PI, floor} = Math
+        let P = point(0,0,1)
+        //let quad = new window.Quad().getQuad()
+        let circle = (n,t) => [...Array(n)].map((x,i)=>{
+            let a = i*(2*PI/n)+t,
+                r = .5+.51 * sin(t)
+            return line(cos(a), sin(a), -r+(P.e02*cos(a)-P.e01*sin(a)))})
+
+        var svg = document.querySelector("#animation").appendChild(this.graph(()=>{
+            let t = performance.now()/4000,
+                cc = redbluelerp(sin(t))
+
+            return [cc, P,
+                cc, ...circle(200,4*sin(t))
+            ]
+        }, {animate:1,
+            pointRadius:1,
+            lineWidth:.3,
+            scale:2,
+            grid:false
+        }))
+        svg.style.background=redbluelerp(1-sin(1))
+//        svg.style.background='transparent';
+        svg.style.width ='100%';
+        svg.style.height='100%';
+
+    })
+</script>>
+</body>
+</html>

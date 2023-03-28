@@ -1,22 +1,23 @@
 import {Conic} from "../util/conics.js"
-import {Algebra} from "ganja"
-
-let penrosePoints = [[[4,0.48,0.29]  ,   [4,0.42,0.15]  ,  [4,-0.61,0.12]  ,  [4,-1.5,0.12]  ,  [4,-1.8,0.12]],
-
- [[4,-2.78,0.2]  ,  [4,-1.18,0.11]  ,   [4,-0.4,0.14]  ,  [4,-0.03,0.18]  ,  [4,-1.33,0.38]],
-[[4,-2.06,0.29]  ,   [4,-1.38,0.14]  ,  [4,0.51,0.28]   ,   [4,-2.98,0.15]  ,  [4,-3.2,0.23]],
-[[3.51,-4,0.22]  ,  [4,-0.22,0.13]   ,   [4,-1.2,0.13]   ,    [4,-2.19,0.15]  ,  [4,-0.23,0.16]],
+import Algebra from "../util/ganja.cjs"
+//var Algebra=require('../util/ganja.cjs');
 
 
-[[4,-0.22,0.22]  ,   [4,-2.27,0.15]   ,   [4,-0.79,0.31]   ,   [4,-0.09,0.28]   ,   [4,-1.58,0.14]],
-     [[4,-2.07,0.15]   ,  [4,-0.7,0.19]   ,    [4,-0.71,0.16]    ,   [4,-3.01,0.17]    ,    [4,-3.36,0.2]],
-[[4,-0.53,0.14]  ,  [4,-0.85,0.12]   ,   [4,-2.94,0.24]  ,    [4,-2.29,0.25]  ,     [4,-0.61,0.13]],
+//const {Algebra} = somepackage
+let foo =  Algebra(6,0,0).inline((conics)=>{
 
-[[4,-1.83,0.22]  ,  [4,-2.2,0.17]   ,  [4,-1,0.16]   ,    [4,-1.27,0.15]   ,   [4,-1.07,0.19]]];
+    console.log("wedge = ",conics);
 
-penrosePoints = penrosePoints.map(row => row.map(([x,y,z])=>[y,z,x]));
-let penroseConics = penrosePoints.map((x)=>Conic.conicFromFivePoints(x))
-console.log(penroseConics.map((x)=>{x.normalize(); return x.getCoeffs()}))
+    let conic = (a,b,c,d,e,f)=>(a*1e1 + b*1e2 + c * 1e3 + d * 1e4+ e*1e5 + f*1e6)
 
-let foo = new Algebra(3,0,1, ()=>{})
-console.log("algebra ",foo)
+    let [c0, c1, c2] = conics.map(x=>conic(...x));
+    console.log("gaels = ",[c0,c1,c2]);
+    console.log("wedge = ",c0^c1^c2)
+    return [c0,c1,c2]
+})
+
+let uC = Conic.conicForCoeffs([1,1,-1,0,0,0]),
+    uH = Conic.conicForCoeffs([1,-1,-1,0,0,0]),
+    t2 = Conic.conicLinePair([1,0,1],[1,0,-1]);
+console.log("coeffs = ",t2.getCoeffs())
+console.log("inline func = ",foo([uC,uH,t2].map(x=>x.getCoeffs())))
