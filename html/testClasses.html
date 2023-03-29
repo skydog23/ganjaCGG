@@ -17,13 +17,13 @@
 
 <script type="module">
     //import {Conic} from "../util/conics.js"
-    import {sqrt} from "mathjs";
+    // import {sqrt} from "mathjs";
     import {Quad} from "../util/quad.js"
 
     //let uC = Conic.conicForCoeffs([1,1,-1,0,0,0]),
 
     let pts = new Quad().getQuad(),
-        foo = sqrt(Math.abs(-9));
+        foo = Math.sqrt(Math.abs(-9));
     document.getElementById("demo").innerHTML = `${foo} and ${pts[0]}`
     //  let uC = Conic.conicForCoeffs([1,1,-1,0,0,0]),
     //     uH = Conic.conicForCoeffs([1,-1,-1,0,0,0]),
