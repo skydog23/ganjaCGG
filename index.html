@@ -1,36 +1,49 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Example of JavaScript in HTML</title>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script SRC="https://unpkg.com/ganja.js"></script>
+    <script SRC="./util/conics.js"></script>
 </head>
 <body>
-<h1>My first github.io page</h1>
-<p>This is an example of how to use JavaScript to draw a red circle on a canvas element.</p>
-<canvas id="circle" width="200" height="200"></canvas>
+
+
+<div id="animation" style="position:absolute; top:0; left:0; z-index:-1; width:100%; height:100%; background:#ffffcc">
+</div>
 <script>
-// Get the canvas element by its id
-const canvas = document.getElementById("circle");
+    Algebra(2,0,1, ()=>{
 
-// Get the context object that provides drawing methods
-const context = canvas.getContext("2d");
+        let point = (x,y,z)=>z*1e12-x*1e02+y*1e01
+        let line = (x,y,z)=>x*1e1+y*1e2+z*1e0
+        var redbluelerp = (t) => (floor(t*255) * 65536 + floor((1-t)*255));
+        let {cos, sin, PI, floor} = Math
+        let P = point(0,0,1)
+        //let quad = new window.Quad().getQuad()
+        let circle = (n,t) => [...Array(n)].map((x,i)=>{
+            let a = i*(2*PI/n)+t,
+                r = .5+.51 * sin(t)
+            return line(cos(a), sin(a), -r+(P.e02*cos(a)-P.e01*sin(a)))})
 
-// Define the center and radius of the circle
-const centerX = canvas.width / 2;
-const centerY = canvas.height / 2;
-const radius = 50;
+        var svg = document.querySelector("#animation").appendChild(this.graph(()=>{
+            let t = performance.now()/4000,
+                cc = redbluelerp(sin(t))
 
-// Start a new path
-context.beginPath();
+            return [cc, P,
+                cc, ...circle(200,4*sin(t))
+            ]
+        }, {animate:1,
+            pointRadius:1,
+            lineWidth:.3,
+            scale:2,
+            grid:false
+        }))
+        svg.style.background=redbluelerp(1-sin(1))
+//        svg.style.background='transparent';
+        svg.style.width ='100%';
+        svg.style.height='100%';
 
-// Draw an arc with the given parameters
-context.arc(centerX, centerY, radius, 0, 2 * Math.PI);
-
-// Set the fill color
-context.fillStyle = "red";
-
-// Fill the circle
-context.fill();
-</script>
+    })
+</script>>
 </body>
 </html>
-
