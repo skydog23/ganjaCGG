@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Example of WebGL in HTML</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gl-matrix/2.8.1/gl-matrix-min.js"></script>
+</head>
+<body>
+<h1>Example of WebGL in HTML</h1>
+<p>This is an example of how to use WebGL to draw a square on a canvas element.</p>
+<!-- Create a canvas element with a given width and height -->
+<canvas id="square" width="200" height="200"></canvas>
+<script>
+// Get the canvas element by its id
+const canvas = document.getElementById("square");
+
+// Get the WebGL context object that provides drawing methods
+const gl = canvas.getContext("webgl");
+
+// Check if WebGL is supported by the browser
+if (!gl) {
+alert("WebGL is not supported by your browser.");
+//return;
+}
+
+// Define the vertices of the square as an array of x, y, z coordinates
+const vertices = [
+-0.5, 0.5, 0.0, // top left
+-0.5, -0.5, 0.0, // bottom left
+0.5, -0.5, 0.0, // bottom right
+0.5, 0.5, 0.0 // top right
+];
+
+// Define the indices of the square as an array of vertex indices
+const indices = [
+0, 1, 2, // first triangle
+0, 2, 3 // second triangle
+];
+
+// Create a buffer to store the vertex data
+const vertexBuffer = gl.createBuffer();
+
+// Bind the buffer to the ARRAY_BUFFER target
+gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
+
+// Copy the vertex data to the buffer
+gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
+
+// Create a buffer to store the index data
+const indexBuffer = gl.createBuffer();
+
+// Bind the buffer to the ELEMENT_ARRAY_BUFFER target
+gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer);
+
+// Copy the index data to the buffer
+gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(indices), gl.STATIC_DRAW);
+
+// Define the vertex shader source code as a string
+const vertexShaderSource = `
+// Declare an attribute to store the vertex position
+attribute vec3 aVertexPosition;
+
+// Declare a uniform to store the projection matrix
+uniform mat4 uProjectionMatrix;
+
+// Declare a uniform to store the model view matrix
+uniform mat4 uModelViewMatrix;
+
+// The main function of the vertex shader
+void main() {
+// Calculate the clip space position by multiplying the vertex position with the projection and model view matrices
+gl_Position = uProjectionMatrix * uModelViewMatrix * vec4(aVertexPosition, 1.0);
+}
+`;
+
+// Define the fragment shader source code as a string
+const fragmentShaderSource = `
+// Declare the precision of the float type
+precision mediump float;
+
+// Declare a uniform to store the color
+uniform vec4 uColor;
+
+// The main function of the fragment shader
+void main() {
+// Set the color of the fragment to the uniform value
+gl_FragColor = uColor;
+}
+`;
+
+// Create a function to compile a shader from a source code
+function compileShader(type, source) {
+// Create a shader object of the given type
+const shader = gl.createShader(type);
+
+// Set the source code of the shader
+gl.shaderSource(shader, source);
+
+// Compile the shader
+gl.compileShader(shader);
+
+// Check if the compilation was successful
+if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+// If not, log the error and delete the shader
+console.error("An error occurred compiling the shader: " + gl.getShaderInfoLog(shader));
+gl.deleteShader(shader);
+return null;
+}
+
+// Return the compiled shader
+return shader;
+}
+
+// Create a function to create a program from a vertex and fragment shader
+function createProgram(vertexShader, fragmentShader) {
+// Create a program object
+const program = gl.createProgram();
+
+// Attach the vertex and fragment shaders to the program
+gl.attachShader(program, vertexShader);
+gl.attachShader(program, fragmentShader);
+
+// Link the program
+gl.linkProgram(program);
+
+// Check if the linking was successful
+if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+// If not, log the error and delete the program
+console.error("An error occurred linking the program: " + gl.getProgramInfoLog(program));
+gl.deleteProgram(program);
+return null;
+}
+
+// Return the created program
+return program;
+}
+
+// Compile the vertex and fragment shaders from the source code
+const vertexShader = compileShader(gl.VERTEX_SHADER, vertexShaderSource);
+const fragmentShader = compileShader(gl.FRAGMENT_SHADER, fragmentShaderSource);
+
+// Create the program from the compiled shaders
+const program = createProgram(vertexShader, fragmentShader);
+
+// Use the program for rendering
+gl.useProgram(program);
+
+// Get the location of the vertex position attribute in the program
+const aVertexPosition = gl.getAttribLocation(program, "aVertexPosition");
+
+// Enable the vertex position attribute
+gl.enableVertexAttribArray(aVertexPosition);
+
+// Specify how to read the vertex position data from the buffer
+gl.vertexAttribPointer(aVertexPosition, 3, gl.FLOAT, false, 0, 0);
+
+// Get the location of the projection matrix uniform in the program
+const uProjectionMatrix = gl.getUniformLocation(program, "uProjectionMatrix");
+
+// Get the location of the model view matrix uniform in the program
+const uModelViewMatrix = gl.getUniformLocation(program, "uModelViewMatrix");
+
+// Get the location of the color uniform in the program
+const uColor = gl.getUniformLocation(program, "uColor");
+
+// Create a projection matrix to map the 3D scene to the 2D canvas
+const projectionMatrix = mat4.create();
+
+// Set the projection matrix to an orthographic projection
+mat4.ortho(projectionMatrix, -1, 1, -1, 1, -1, 1);
+
+// Set the value of the projection matrix uniform to the projection matrix
+gl.uniformMatrix4fv(uProjectionMatrix, false, projectionMatrix);
+
+// Create a model view matrix to position and orient the square
+const modelViewMatrix = mat4.create();
+
+// Set the model view matrix to the identity matrix
+mat4.identity(modelViewMatrix);
+
+// Set the value of the model view matrix uniform to the model view matrix
+gl.uniformMatrix4fv(uModelViewMatrix, false, modelViewMatrix);
+
+// Set the value of the color uniform to red
+gl.uniform4f(uColor, 1, 0, 0, 1);
+
+// Set the clear color to black
+gl.clearColor(0, 0, 0, 1);
+
+// Clear the color buffer
+gl.clear(gl.COLOR_BUFFER_BIT);
+
+// Draw the square using the index buffer
+gl.drawElements(gl.TRIANGLES, 6, gl.UNSIGNED_SHORT, 0);
+</script>
+</body>
+</html>
+

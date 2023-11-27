@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Example of using mathjs in HTML</title>
+<!-- Load the mathjs library from a CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.4.4/math.min.js"></script>
+</head>
+<body>
+<h1>Example of using mathjs in HTML</h1>
+<p>This is an example of how to use the mathjs library to calculate and print Pi to 100 decimal places.</p>
+<p id="result"></p>
+<script>
+// Create a mathjs instance with the desired precision
+//const math = mathjs.create(mathjs.all, {precision: 101});
+
+// Calculate Pi using the Chudnovsky algorithm
+// See [1](https://en.wikipedia.org/wiki/Chudnovsky_algorithm) for details
+function chudnovskyPi() {
+// Define some constants
+const k = 6;
+const C = 640320;
+const C3_OVER_24 = math.pow(C, 3) / 24;
+const DIGITS_PER_TERM = math.log(C3_OVER_24 / 6 / 2 / 6) / math.LN10;
+
+// Define some variables
+let k1 = math.bignumber(6 * k - 5);
+let k2 = math.bignumber(2 * k - 1);
+let k3 = math.bignumber(6 * k - 1);
+let a = math.bignumber(1);
+let b = math.bignumber(k1 * k2 * k3);
+let c = math.bignumber(0);
+let d = math.bignumber(1);
+let e = math.bignumber(0);
+let f = math.bignumber(0);
+let g = math.bignumber(0);
+let h = math.bignumber(0);
+let i = math.bignumber(0);
+let j = math.bignumber(0);
+let l = math.bignumber(0);
+let m = math.bignumber(0);
+let n = math.bignumber(0);
+let o = math.bignumber(0);
+let p = math.bignumber(0);
+let q = math.bignumber(0);
+let r = math.bignumber(0);
+let s = math.bignumber(0);
+let t = math.bignumber(0);
+let u = math.bignumber(0);
+let v = math.bignumber(0);
+let w = math.bignumber(0);
+let x = math.bignumber(0);
+let y = math.bignumber(0);
+let z = math.bignumber(0);
+
+// Loop until enough digits are obtained
+while (true) {
+// Update the variables
+k1 += 12;
+k2 += 4;
+k3 += 12;
+a = math.multiply(a, math.bignumber(k1 * k2 * k3));
+b = math.multiply(b, math.bignumber(k * k * k * C3_OVER_24));
+c = math.add(c, math.multiply(a, k));
+d = math.add(d, b);
+e = math.divide(c, d);
+f = math.add(f, e);
+g = math.sqrt(math.multiply(10005, f));
+h = math.multiply(426880, g);
+i = math.multiply(13591409, f);
+j = math.add(j, i);
+//k += 1;
+l = math.multiply(545140134, f);
+m = math.add(m, l);
+n = math.multiply(math.bignumber(-262537412640768000), f);
+o = math.add(o, n);
+p = math.divide(m, o);
+q = math.multiply(10005, p);
+r = math.sqrt(q);
+s = math.multiply(426880, r);
+t = math.divide(s, j);
+u = math.subtract(t, v);
+v = t;
+w = math.abs(u);
+
+document.getElementById("result").innerHTML = "w = " + w.toString();
+// Check if the precision is reached
+if (math.smaller(w, math.pow(math.bignumber(10), -101))) {
+break;
+}
+}
+
+// Return the result
+return t;
+}
+
+// Call the function and display the result
+const pibig  = chudnovskyPi();
+//  const digits = ["0","1","2","3","4","5","6","7","8","9"];
+//  let printDigit = (num, result)=>(num < 1) ? result : printDigit(math.floor(math.divide(num,10)), digits[math.mod(num,10)]+result);
+document.getElementById("result").innerHTML = "Pi = " + math.format(pibig, 100);
+</script>
+</body>
+</html>

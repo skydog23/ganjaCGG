@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Example of JavaScript in HTML</title>
+</head>
+<body>
+<h1>Example of JavaScript in HTML</h1>
+<p>This is an example of how to include JavaScript code into an HTML page.</p>
+<p id="demo">This paragraph will be changed by JavaScript.</p>
+<script>
+// Get the canvas element by its id
+const canvas = document.getElementById("circle");
+
+// Get the context object that provides drawing methods
+const context = canvas.getContext("2d");
+
+// Define the center and radius of the circle
+const centerX = canvas.width / 2;
+const centerY = canvas.height / 2;
+const radius = 50;
+
+// Start a new path
+context.beginPath();
+
+// Draw an arc with the given parameters
+context.arc(centerX, centerY, radius, 0, 2 * Math.PI);
+
+// Set the fill color
+context.fillStyle = "red";
+
+// Fill the circle
+context.fill();
+
+// Set the stroke color
+context.strokeStyle = "black";
+
+// Set the stroke width
+context.lineWidth = 5;
+
+// Stroke the circle
+context.stroke();
+
+</script>
+</body>
+</html>
+

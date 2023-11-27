@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Example of using mathjs in HTML</title>
+<!-- Load the mathjs library from a CDN -->
+<!--script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.4.4/math.min.js"> type="text/javascript" </script-->
+<script src="./math.js"> type="text/javascript" </script>
+</head>
+<body>
+<h1>Example of using mathjs in HTML</h1>
+<p>This is an example of how to use the mathjs library to calculate the factorial of 100.</p>
+<p id="result"></p>
+<script type="text/javascript">
+// Create a mathjs instance with the desired precision
+//const math = mathjs.create(mathjs.all, {precision: 101});
+
+// Define a function to calculate the factorial of a number
+function factorial(n) {
+// If n is zero or negative, return 1
+if (n <= 0) {
+return 1;
+}
+// Otherwise, use recursion to multiply n by the factorial of n - 1
+return math.multiply(n, factorial(math.subtract(n, 1)));
+}
+
+// Call the function and display the result
+const fact = factorial(math.bignumber(100));
+    const digits = ["0","1","2","3","4","5","6","7","8","9"];
+    let printDigit = (num, result)=>(num < 1) ? result : printDigit(math.floor(math.divide(num,10)), digits[math.mod(num,10)]+result);
+
+//document.getElementById("result").innerHTML = "100! = " + math.format(fact);
+document.getElementById("result").innerHTML = "100! = " + printDigit(fact,"");;
+</script>
+</body>
+</html>
