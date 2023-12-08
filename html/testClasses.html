@@ -5,7 +5,8 @@
     <title>Title</title>
 <!--    <script SRC="https://unpkg.com/ganja.js"></script>-->
 <!--    <script SRC="../util/conics.js" type="module"></script>-->
-    <script SRC="https://cdn.tutorialjinni.com/mathjs/9.5.1/math.js" ></script>
+<!--    <script src="./math.js" type="text/javascript"></script>-->
+    <script src="https://unpkg.com/mathjs@12.1.0/lib/browser/math.js"></script>
 </head>
 <body>
 
@@ -20,10 +21,10 @@
     // import {sqrt} from "mathjs";
     import {Quad} from "../util/quad.js"
 
-    //let uC = Conic.conicForCoeffs([1,1,-1,0,0,0]),
+    // let uC = Conic.conicForCoeffs([1,1,-1,0,0,0]);
 
     let pts = new Quad().getQuad(),
-        foo = Math.sqrt(Math.abs(-9));
+        foo = math.sqrt(math.abs(-9));
     document.getElementById("demo").innerHTML = `${foo} and ${pts[0]}`
     //  let uC = Conic.conicForCoeffs([1,1,-1,0,0,0]),
     //     uH = Conic.conicForCoeffs([1,-1,-1,0,0,0]),
