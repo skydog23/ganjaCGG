@@ -195,42 +195,42 @@ ${embed(gB)}
 ## Discussion
 
 A rotation is a direct isometry that has one proper fixed element. Its behavior 
-can be understood by considering tstheir action on the ideal elements. To be precise:
+can be understood by considering its action on the ideal elements. To be precise:
 
 <DIV CLASS="cols">
 <DIV CLASS="col">
 
 
-A 2D $e$-rotation fixes a ${dct`euclidean point`} $Z$ and the absolute ${dct`line`} $z$. 
+A 2D $e$-rotation fixes a ${dct`euclidean point`} $C$ and the absolute ${dct`line`} $z$. 
 
 A rotation is determined 
-by one ideal ${dct`point`} $I$ and its image $I'$. 
-Every ideal ${dct`point`} $J$ ${dct`moves along`}   $z$ 
-so that $\angle_e JJ' = \angle_e II'$. This is a well-defined elliptic
-isometry of the ${dct`point range`} $z$. 
+by one ideal ${dct`point`} $A$ and its image $A'$. 
+Every ideal ${dct`point`} $B$ ${dct`moves along`}   $z$ 
+so that $\angle_e BB' = \angle_e AA'$. This is a well-defined elliptic
+isometry of the ${dct`absolute point range`} $z$. 
 
-If $P$ is any ${dct`euclidean point`} 
-we can write $P = Z + I$
-where $I := (P\vee Z)\wedge z$ is the ideal ${dct`point`} of the ${dct`line`} $P\vee Z$ 
-weighted by the $e$-distance from 
-$P$ to $Z$.  Then by linearity $P' = (Z + I)' = Z + I'$.
+Let $X$ be any ${dct`euclidean point`} different from $C$.
+Define the ${dct`line`} $r := X\vee C$ and its ideal ${dct `point`} $A := r\wedge z$.
+Then $\| A \|_\infty = d_e(PX)$ is the $e$-distance from $P$ to $X$ and
+$X = P + A$. 
+By linearity $X' = (C + A)' = C + A'$ since $C$ is fixed.
 </DIV>
 
 <DIV CLASS="col">
 
-A 2D $d$-rotation fixes a ${dct`dual euclidean line`} $z$ 
-and the absolute ${dct`point`} $Z$. 
+A 2D $d$-rotation fixes a ${dct`dual euclidean line`} $c$ and the absolute ${dct`point`} RZ$. 
 
-A rotation is determined by one ideal ${dct`line`} $i$ and its image $i'$. 
-Every ideal ${dct`line`} $j$ ${dct`rotates around`} $Z$ 
-so that $\angle_d jj' = \angle_d ii'$. This is a well-defined elliptic
-isometry of the ${dct`line pencil`} $Z$. 
+A dual rotation is determined 
+by one ideal ${dct`line`} $a$ and its image $a'$. 
+Every ideal ${dct`line`} $b$ ${dct`rotates around`}   $Z$ 
+so that $\angle_d bb' = \angle_d aa'$. This is a well-defined elliptic
+isometry of the ${dct`absolute line pencil`} $Z$. 
 
-If $m$ is any ${dct`dual euclidean line`} 
-we can write $m = z + i$
-where $i := (m\wedge z)\vee Z$ is the ideal ${dct`line`} of the ${dct`point`} $m\wedge z$ 
-weighted by the $d$-distance from 
-$m$ to $z$.  Then by linearity $m' = (z + i)' = z + i'$.
+Let $x$ be any ${dct`dual euclidean line`} different from $c$.
+Define the ${dct`point`} $R := x\wedge c$ and its ideal ${dct line} $a := R\vee C$.
+Then $\| a \|_\infty = {dct d_d(px)}$ is the $d$-distance from $p$ to $x$ and
+$x = p + a$. 
+By linearity $x' = (c + a)' = c + a'$ since $c$ is fixed.
 
 
 </DIV>
