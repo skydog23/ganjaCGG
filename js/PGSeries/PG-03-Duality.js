@@ -76,32 +76,26 @@ Dualizing means to use a *dictionary of duality* to replace dual terms with thei
 
 For two dimensions, the beginning of the dictionary of duality looks like:
 
-\begin{center}
-\begin{tabular}{ |c|c| }
-\hline
-\textbf{Term} & \textbf{dual term}\\
-\hline
-line & point \\
-join & intersect \\
-lies on & passes through \\
-rotate around & move along
-\hline
-\end{tabular}
-\end{center}
+ Term      | Dual Term |
+| ----------- | ----------- |
+| line      | point       |
+| join   | intersect        |
+| lies on   | passes through        |
+| rotate around   | move along        |
 
-Notice that the dual pairs are symmetric; for each pair, I could also write it in the opposite order.
-So it's not like an ordinary dictionary one of the partner terms belongs to, say, English and the other is French.  
+Notice that the dual pairs are symmetric; for each pair, I can switch the left and right terms without changing the meaning.
+So it's not like an ordinary dictionary one of the partner terms belongs to, say, English language and the other is French language.  
 There is only
-the language of projective geometry, and within this language there are pairs of dual partners.
+the one language of projective geometry, and within this language there are pairs of dual partners.
 
 Example: The dual of:
-\begin{minted}{}
+<blockquote>
   A point moving along a line and joined to a point not lying on the line.
-\end{minted}
+</blockquote>
 is
-\begin{minted}{}
+<blockquote>
   A line rotating around a point and intersected with a line not passing through the point.
-\end{minted}
+</blockquote>
 
 
 %From this follows the *Principle of duality*: 
